@@ -1,0 +1,62 @@
+{
+	"geode": "4.7.0",
+	"gd": {
+		"win": "2.2074",
+		"android": "2.2074",
+		"mac": "2.2074",
+		"ios": "2.2074"
+	},
+	"id": "jotabelike.pausestats",
+	"name": "Pause Stats",
+	"version": "v1.0.0",
+	"developer": "XJotabelikeX",
+	"description": "Mores stats in pause menu",
+	"settings": {
+		"show_attempts": {
+			"type": "bool",
+			"default": true,
+			"name": "Show Attempts"
+		},
+		"show_jumps": {
+			"type": "bool",
+			"default": true,
+			"name": "Show Jumps"
+		},
+		"show_completions": {
+			"type": "bool",
+			"default": true,
+			"name": "Show Completions"
+		},
+		"show_object_count": {
+			"type": "bool",
+			"default": true,
+			"name": "Show Object Count"
+		},
+		"show_gamemode": {
+			"type": "bool",
+			"default": true,
+			"name": "Show Gamemode"
+		},
+		"show_device": {
+			"type": "bool",
+			"default": true,
+			"name": "Show Device"
+		},
+		"text_opacity": {
+			"type": "float",
+			"default": 1.0,
+			"min": 0.1,
+			"max": 1.0,
+			"name": "Text Opacity",
+			"control": { "slider": true }
+		},
+		"stats_scale": {
+			"type": "float",
+			"default": 1.0,
+			"min": 0.5,
+			"max": 2.0,
+			"name": "Stats Size",
+			"control": { "slider": true }
+		}
+	}
+}
