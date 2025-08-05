@@ -202,7 +202,7 @@ public:
 
         // GAMEMODE (Clasic/Plat)
         if (showGamemode) {
-            std::string gamemode = playLayer->m_isPlatformer ? "Plat" : "Clasic";
+            std::string gamemode = playLayer->m_isPlatformer ? "Plat" : "Classic";
             m_fields->gamemodeLabel = CCLabelBMFont::create("Gamemode", "goldFont.fnt");
             m_fields->gamemodeLabel->setAnchorPoint({ 0.5f, 0.5f });
             m_fields->gamemodeLabel->setScale(0.33f * statsScale);
