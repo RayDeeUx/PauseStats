@@ -278,8 +278,9 @@ class $modify(PauseLayerHook, PauseLayer) {
     void addStatsToButton(CCNode* node, GJGameLevel* level, PlayLayer* pl) {
         if (!node || !level || !pl) return;
         if (!Mod::get()->getSettingValue<bool>("use_button")) return;
+        std::string levelIDString = fmt::format("{}", level->m_levelID.value());
         int completions = 0;
-        loadCompletions(levelKey, completions);
+        loadCompletions(levelIDString, completions);
         InfoAlertButton* infoButton = InfoAlertButton::create(
             level->m_levelName,
             fmt::format(
@@ -297,7 +298,7 @@ class $modify(PauseLayerHook, PauseLayer) {
                 level->m_objectCount,
                 findDevice(),
                 pl->m_isPlatformer ? "Plat" : "Classic",
-                level->m_levelID.value(),
+                levelIDString,
                 level->m_songID ? fmt::format("{}", level->m_songID) : "[RobTop Song]"
             ),
             1.f
