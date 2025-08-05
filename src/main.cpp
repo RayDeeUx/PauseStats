@@ -297,10 +297,10 @@ class $modify(PauseLayerHook, PauseLayer) {
                 level->m_jumps,
                 completions,
                 level->m_objectCount,
-                findDevice(),
-                pl->m_isPlatformer ? "Plat" : "Classic",
                 levelIDString,
-                level->m_songID ? fmt::format("{}", level->m_songID) : "[RobTop Song]"
+                level->m_songID ? fmt::format("{}", level->m_songID) : "[RobTop Song]",
+                pl->m_isPlatformer ? "Plat" : "Classic",
+                findDevice()
             ),
             1.f
         );
