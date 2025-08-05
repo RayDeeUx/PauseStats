@@ -67,7 +67,8 @@ class $modify(PauseLayerHook, PauseLayer) {
         auto level = playLayer->m_level;
         if (!level) return;
 
-        if (Mod::get()->getSettingValue<bool>("use_button")) return PauseLayerHook::addStatsToButton(getChildByID("right-button-menu"), level, pl);
+        CCNode* rightSideMenu = getChildByID("right-button-menu"); 
+        if (rightSideMenu && Mod::get()->getSettingValue<bool>("use_button")) return PauseLayerHook::addStatsToButton(rightSideMenu, level, pl);
 
         float textOpacity = Mod::get()->getSettingValue<float>("text_opacity");
         float statsScale = Mod::get()->getSettingValue<float>("stats_scale");
