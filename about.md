@@ -6,7 +6,7 @@ Customize what stats you see, their opacity, and their size — all from the mod
 
 - Modern, clean, and useful pause screen
 - Full customization of the stats shown
-- Works on PC
+- Works on PC, android and IOs
 - Open source and easy to use!
 - Gamemode 
 Enjoy a better way to pause in Geometry Dash!

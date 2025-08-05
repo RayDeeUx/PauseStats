@@ -68,4 +68,4 @@ geode build
 * [Geode SDK Source Code](https://github.com/geode-sdk/geode/)
 * [Geode CLI](https://github.com/geode-sdk/cli)
 * [Bindings](https://github.com/geode-sdk/bindings/)
-* [Dev Tools](https://github.com/geode-sdk/DevTools)":)" 
+* [Dev Tools](https://github.com/geode-sdk/DevTools)
