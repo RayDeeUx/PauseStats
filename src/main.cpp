@@ -5,7 +5,7 @@
 using namespace geode::prelude;
 
 constexpr float STATS_X = 40.0f;
-constexpr float Y_START = 240.0f;
+constexpr float Y_START = 243.0f;
 constexpr float DELTA_Y = 35.0f;
 
 // Funciones para guardar/cargar completions por nivel
@@ -84,7 +84,7 @@ public:
         // ATTEMPTS
         if (showAttempts) {
             int totalAttempts = level->m_attempts;
-            m_fields->attemptsLabel = CCLabelBMFont::create("Attemps", "goldFont.fnt");
+            m_fields->attemptsLabel = CCLabelBMFont::create("Attempts", "goldFont.fnt");
             m_fields->attemptsLabel->setAnchorPoint({ 0.5f, 0.5f });
             m_fields->attemptsLabel->setScale(0.33f * statsScale);
             m_fields->attemptsLabel->setColor({ 200,200,200 });
