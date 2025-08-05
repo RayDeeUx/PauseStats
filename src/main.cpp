@@ -38,7 +38,6 @@ class $modify(PlayLayerHook, PlayLayer) {
 
     void levelComplete() {
         PlayLayer::levelComplete();
-        if (m_isPracticeMode || m_isTestMode) return; // dont track if not in normal mode
         if (!m_fields->completed) {
             m_fields->completed = true;
             auto level = m_level;
