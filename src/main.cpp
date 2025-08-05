@@ -13,6 +13,18 @@ void loadCompletions(const std::string& key, int& completions) {
 void saveCompletions(const std::string& key, int completions) {
     Mod::get()->setSavedValue<int>("level_completions_" + key, completions);
 }
+std::string findDevice() {
+    std::string device = "PC";
+    #ifdef GEODE_IS_MACOS
+    device = "macOS";
+    #endif
+    switch (CCApplication::sharedApplication()->getTargetPlatform()) {
+        case kTargetIphone: return "iOS";
+        case kTargetIpad: return "iPadOS";
+        case kTargetAndroid: return "Android";
+        default: return device;
+    }
+}
 float getStatsX() { return Mod::get()->getSettingValue<float>("stats_x"); }
 float getStatsY() { return Mod::get()->getSettingValue<float>("stats_y"); }
 
@@ -26,6 +38,7 @@ class $modify(PlayLayerHook, PlayLayer) {
 
     void levelComplete() {
         PlayLayer::levelComplete();
+        if (m_isPracticeMode || m_isTestMode) return; // dont track if not in normal mode
         if (!m_fields->completed) {
             m_fields->completed = true;
             auto level = m_level;
@@ -53,6 +66,8 @@ class $modify(PauseLayerHook, PauseLayer) {
         if (!playLayer) return;
         auto level = playLayer->m_level;
         if (!level) return;
+
+        if (Mod::get()->getSettingValue<bool>("use_button")) return PauseLayerHook::addStatsToButton(getChildByID("right-button-menu"), level, pl);
 
         float textOpacity = Mod::get()->getSettingValue<float>("text_opacity");
         float statsScale = Mod::get()->getSettingValue<float>("stats_scale");
@@ -161,13 +176,7 @@ class $modify(PauseLayerHook, PauseLayer) {
             y -= deltaY * statsScale;
         }
         if (showDevice) {
-            std::string device = "PC";
-            switch (CCApplication::sharedApplication()->getTargetPlatform()) {
-            case kTargetIphone:
-            case kTargetIpad:
-            case kTargetAndroid: device = "Mobile"; break;
-            default: device = "PC";
-            }
+            std::string device = findDevice();
             auto lbl = CCLabelBMFont::create("DEVICE", "goldFont.fnt");
             lbl->setScale(0.33f * statsScale);
             lbl->setColor({ 200,200,200 });
@@ -264,5 +273,36 @@ class $modify(PauseLayerHook, PauseLayer) {
             if (lbl) lbl->setPosition({ newX, y - 13.0f * statsScale });
             y -= deltaY * statsScale;
         }
+    }
+
+    void addStatsToButton(CCNode* node, GJGameLevel* level, PlayLayer* pl) {
+        if (!node || !level || !pl) return;
+        if (!Mod::get()->getSettingValue<bool>("use_button")) return;
+        int completions = 0;
+        loadCompletions(levelKey, completions);
+        InfoAlertButton* infoButton = InfoAlertButton::create(
+            level->m_levelName,
+            fmt::format(
+                "Attempts: {}\n"
+                "Jumps: {}\n"
+                "Completions: {}\n"
+                "Object Count: {}\n"
+                "Level ID: {}\n"
+                "Song ID: {}\n"
+                "Gamemode: {}\n"
+                "Device: {}",
+                level->m_attempts,
+                level->m_jumps,
+                completions,
+                level->m_objectCount,
+                findDevice(),
+                pl->m_isPlatformer ? "Plat" : "Classic",
+                level->m_levelID.value(),
+                level->m_songID ? fmt::format("{}", level->m_songID) : "[RobTop Song]"
+            ),
+            1.f
+        );
+        node->addChild(infoButton);
+        node->updateLayout();
     }
 };
