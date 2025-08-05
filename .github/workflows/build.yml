@@ -7,6 +7,6 @@ on:
 
 jobs:
   build:
-    uses: geode-sdk/workflows/.github/workflows/build-multiplatform.yml@main
+    uses: geode-sdk/build-actions/.github/workflows/build-multiplatform.yml@main
     with:
       mod-id: jotabelike.pausestats
