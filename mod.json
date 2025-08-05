@@ -91,11 +91,6 @@
 			"max": 2.0,
 			"name": "Stats Size",
 			"control": { "slider": true }
-		},
-		"use_button": {
-			"type": "bool",
-			"default": false,
-			"name": "Use Button Instead (Node IDs required)"
 		}
 	}
 }

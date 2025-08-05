@@ -67,9 +67,6 @@ class $modify(PauseLayerHook, PauseLayer) {
         auto level = playLayer->m_level;
         if (!level) return;
 
-        CCNode* rightSideMenu = getChildByID("right-button-menu"); 
-        if (rightSideMenu && Mod::get()->getSettingValue<bool>("use_button")) return PauseLayerHook::addStatsToButton(rightSideMenu, level, playLayer);
-
         float textOpacity = Mod::get()->getSettingValue<float>("text_opacity");
         float statsScale = Mod::get()->getSettingValue<float>("stats_scale");
         float statsX = getStatsX();
@@ -274,37 +271,5 @@ class $modify(PauseLayerHook, PauseLayer) {
             if (lbl) lbl->setPosition({ newX, y - 13.0f * statsScale });
             y -= deltaY * statsScale;
         }
-    }
-
-    void addStatsToButton(CCNode* node, GJGameLevel* level, PlayLayer* pl) {
-        if (!node || !level || !pl) return;
-        if (!Mod::get()->getSettingValue<bool>("use_button")) return;
-        std::string levelIDString = fmt::format("{}", level->m_levelID.value());
-        int completions = 0;
-        loadCompletions(levelIDString, completions);
-        InfoAlertButton* infoButton = InfoAlertButton::create(
-            level->m_levelName,
-            fmt::format(
-                "Attempts: {}\n"
-                "Jumps: {}\n"
-                "Completions: {}\n"
-                "Object Count: {}\n"
-                "Level ID: {}\n"
-                "Song ID: {}\n"
-                "Gamemode: {}\n"
-                "Device: {}",
-                level->m_attempts,
-                level->m_jumps,
-                completions,
-                level->m_objectCount,
-                levelIDString,
-                level->m_songID ? fmt::format("{}", level->m_songID) : "[RobTop Song]",
-                pl->m_isPlatformer ? "Plat" : "Classic",
-                findDevice()
-            ),
-            1.f
-        );
-        node->addChild(infoButton);
-        node->updateLayout();
     }
 };
